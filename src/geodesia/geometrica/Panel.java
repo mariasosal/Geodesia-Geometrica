@@ -47,7 +47,7 @@ public class Panel extends javax.swing.JPanel {
         texto6 = new javax.swing.JLabel();
         resultadoZ = new javax.swing.JLabel();
         calcularZ = new javax.swing.JButton();
-        prueba = new javax.swing.JTextField();
+        pruebaS = new javax.swing.JTextField();
 
         titulo.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         titulo.setText("Geodesia Geomètrica");
@@ -83,17 +83,27 @@ public class Panel extends javax.swing.JPanel {
 
         calcularY.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         calcularY.setText("Calcular");
+        calcularY.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                calcularYMouseClicked(evt);
+            }
+        });
 
         texto6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        texto6.setText("Y=");
+        texto6.setText("Z=");
 
         resultadoZ.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         resultadoZ.setText("resultado");
 
         calcularZ.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         calcularZ.setText("Calcular");
+        calcularZ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                calcularZMouseClicked(evt);
+            }
+        });
 
-        prueba.setText("jTextField1");
+        pruebaS.setText("Prueba sexa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,20 +137,20 @@ public class Panel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(agregarLatitud))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(texto5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(resultadoY)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(calcularY)))
+                                .addComponent(texto5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(resultadoY)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(calcularY)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(texto6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(resultadoZ)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(calcularZ)))))
+                                .addComponent(calcularZ))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(pruebaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -168,9 +178,9 @@ public class Panel extends javax.swing.JPanel {
                     .addComponent(texto6)
                     .addComponent(resultadoZ)
                     .addComponent(calcularZ))
-                .addGap(33, 33, 33)
-                .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pruebaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,9 +191,23 @@ public class Panel extends javax.swing.JPanel {
        coordenadas.minutos=(double)valor2;
        double valor3 =Double.parseDouble(LSegundos.getText());
        coordenadas.segundos=(double)valor3;
-       prueba.setText(String.valueOf(coordenadas.ConvertirGrados()));
-    
+       pruebaS.setText(String.valueOf(coordenadas.ConvertirGrados()));
+       double valor4 =Double.parseDouble(pruebaS.getText()); 
+       coordenadas.latitud = Math.toRadians(valor4);
+       
     }//GEN-LAST:event_agregarLatitudMouseClicked
+
+    private void calcularYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcularYMouseClicked
+        double valor = Double.parseDouble(pruebaS.getText());
+        coordenadas.latitud=Math.toRadians(valor);
+       resultadoY.setText(String.valueOf(coordenadas.CalcularY()));
+    }//GEN-LAST:event_calcularYMouseClicked
+
+    private void calcularZMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcularZMouseClicked
+        double valor = Double.parseDouble(pruebaS.getText());
+        coordenadas.latitud=Math.toRadians(valor);
+       resultadoZ.setText(String.valueOf(coordenadas.CalcularZ()));
+    }//GEN-LAST:event_calcularZMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,7 +217,7 @@ public class Panel extends javax.swing.JPanel {
     private javax.swing.JButton agregarLatitud;
     private javax.swing.JButton calcularY;
     private javax.swing.JButton calcularZ;
-    private javax.swing.JTextField prueba;
+    private javax.swing.JTextField pruebaS;
     private javax.swing.JLabel resultadoY;
     private javax.swing.JLabel resultadoZ;
     private javax.swing.JLabel texto1;
